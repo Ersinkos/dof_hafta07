@@ -10,6 +10,10 @@ public class run : MonoBehaviour
     Rigidbody rb;
     int toplananCoin = 0;
     int toplamCoin;
+    public bool isGrounded = true;
+    [SerializeField] Transform groundCheck;
+    [SerializeField] LayerMask ground;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +21,8 @@ public class run : MonoBehaviour
         animator = GetComponent<Animator>();
         coinAnimator = GameObject.Find("coin").GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        print("Þu ana dek toplanan coinler : "+PlayerPrefs.GetInt("ToplamCoin"));
+        print("Þu ana dek toplanan coinler : " + PlayerPrefs.GetInt("ToplamCoin"));
+        hizCarpani = PlayerPrefs.GetFloat("PlayerSpeed");
     }
 
     // Update is called once per frame
@@ -43,7 +48,8 @@ public class run : MonoBehaviour
         {
             rb.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
         }
-
+        GroundCheck();
+        animator.SetBool("isGround", isGrounded);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -63,4 +69,9 @@ public class run : MonoBehaviour
             Destroy(other.gameObject, 1);
         }
     }
+    public void GroundCheck()
+    {
+        isGrounded = Physics.CheckSphere(groundCheck.position, .1f, ground);
+    }
+
 }
