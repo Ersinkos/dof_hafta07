@@ -14,7 +14,7 @@ public class coin : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        print("carpisma");
+        
         if (other.CompareTag("Player"))
         {
             animator.SetBool("isDestroy", true);
