@@ -351,6 +351,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/coin.cs"
 "Assets/Scripts/MainMenu.cs"
+"Assets/Scripts/PlayAgainButtonController.cs"
 "Assets/Scripts/run.cs"
 -langversion:9.0
 

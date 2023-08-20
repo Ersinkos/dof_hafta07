@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
+
 public class run : MonoBehaviour
 {
     Animator animator;
@@ -16,6 +18,7 @@ public class run : MonoBehaviour
     [SerializeField] LayerMask ground;
     public TextMeshProUGUI toplananCoinText;
     public TextMeshProUGUI gameFinishedText;
+    public Button playAgain;
 
     // Start is called before the first frame update
     void Start()
@@ -63,7 +66,10 @@ public class run : MonoBehaviour
         animator.SetBool("isGround", isGrounded);
         if (isFalling())
         {
-            SceneManager.LoadScene(0);
+            gameFinishedText.text = "Oyunu Kaybettiniz";
+            gameFinishedText.color = Color.red;
+            gameFinishedText.enabled = true;
+            playAgain.gameObject.SetActive(true);
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -75,6 +81,10 @@ public class run : MonoBehaviour
             toplamCoin = PlayerPrefs.GetInt("ToplamCoin");
             toplamCoin += toplananCoin;
             PlayerPrefs.SetInt("ToplamCoin", toplamCoin);
+            gameFinishedText.text = "Oyunu Kaybettiniz";
+            gameFinishedText.color = Color.red;
+            gameFinishedText.enabled = true;
+            playAgain.gameObject.SetActive(true);
 
         }
         if (other.CompareTag("coin"))
@@ -100,5 +110,6 @@ public class run : MonoBehaviour
         if (gameObject.transform.position.y <= -2) isFalling = true;
         return isFalling;
     }
+
 
 }
